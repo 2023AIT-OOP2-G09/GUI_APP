@@ -57,12 +57,6 @@ def address_post():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-
-# http://127.0.0.1:5000/
 @app.route("/")
 def index():
     return render_template("addressbook.html")
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
