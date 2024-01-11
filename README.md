@@ -21,7 +21,6 @@ GUIアプリ用のリポジトリ
 
 ## ディレクトリの構造
 [GUI_APP]
-<<<<<<< HEAD
 <br>
   ├[app_images]（アプリのイメージ・企画書）
 <br>
@@ -58,5 +57,3 @@ GUIアプリ用のリポジトリ
   └README.md
 <br>
   └schedule.json（スケジュールのデータ）
-=======
->>>>>>> 9ff6e0bf8e7c5653ac093a39276e64bb39d378b0
