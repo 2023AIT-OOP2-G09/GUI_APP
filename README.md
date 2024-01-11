@@ -20,3 +20,39 @@ GUIアプリ用のリポジトリ
 
 ## ディレクトリの構造
 [GUI_APP]
+<br>
+  ├[app_images]（アプリのイメージ・企画書）
+<br>
+  │  └オブジェクト演習GUIアプリ案＿柴田.pdf
+<br>
+  │  └カレンダー.png
+<br>
+  │  └勉強時間.jpg
+<br>
+  │  └予定の追加.jpg
+<br>
+  │  └予定一覧.jpg
+<br>
+  ├[module]（追加、削除、勉強時間のモジュール）
+<br>
+  │  └add.py（追加のモジュール）
+<br>
+  │  └Delete.py（削除のモジュール）
+<br>
+  │  └study.py（勉強時間のモジュール）
+<br>
+  ├[templates](webサイトのそれぞれのhtml)
+<br>
+  │  └index.css（カレンダーのCSS）
+<br>
+  │  └index.html（カレンダーのHTMl）
+<br>
+  │  └index.js（カレンダーのJS）
+<br>
+  └k00000_12.md（報告書のテンプレート）
+<br>
+  └main.py (frask側のプログラム)
+<br>
+  └README.md
+<br>
+  └schedule.json（スケジュールのデータ）
