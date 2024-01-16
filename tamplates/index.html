@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+ </head>
+
+ <body>
+  <script src="index.js"></script>
+  <div class="calendar_area">
+    <div class="calendar_header">
+      <p id="year_month_label"></p>
+      <button id="prev_year_btn" onClick="prev_year()"><i class="fas fa-angle-double-left"></i></button>
+      <button id="prev_month_btn" onClick="prev_month()"><i class="fas fa-angle-left"></i></button>
+      <button id="now_btn" onClick="now_month()"><i class="fas fa-circle"></i></button>
+      <button id="next_month_btn" onClick="next_month()"><i class="fas fa-angle-right"></i></button>
+      <button id="next_year_btn" onClick="next_year()"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+    <div id="calendar_body"></div>
+ </div>
+ </body>
+</html>
