@@ -1,11 +1,12 @@
-/* ヘッダー（年月とボタン） */
-div.calendar_header {
+  /* ヘッダー（年月とボタン） */
+  div.calendar_header {
     text-align: center;
+    margin-bottom: 20px; /* カレンダーとの間にスペースを追加 */
   }
   
   /* 年月 */
   div.calendar_header > p#year_month_label {
-    margin: 20px 20px 10px;
+    margin: 10px;
     font-size: 1.5em;
     font-weight: bold;
   }
@@ -73,4 +74,51 @@ div.calendar_header {
   /* マウスオーバー時 */
   table.calendar_tbl tr td.with_date:hover {
     background-color: #fadfc0;
+  }
+
+  /* ボタンを包む要素に対して text-align: center; を追加 */
+  .button-container {
+    text-align: center;
+  }
+
+  /* ボタンのスタイル */
+  .btn--orange,
+  a.btn--orange,
+  button.btn--orange {
+    color: #fff;
+    background-color: #c1bfbd;
+    margin: 10px; /* 上下左右のマージンを10pxに設定 */
+    padding: 10px 20px; /* 余白を追加 */
+    border-radius: 5px; /* 角を丸くする */
+  }
+
+  .btn--orange:hover,
+  a.btn--orange:hover,
+  button.btn--orange:hover {
+    color: #fff;
+    background: #494847;
+  }  
+  
+  .btn,
+  a.btn,
+  button.btn {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+   border-radius: 0.5rem;
   }

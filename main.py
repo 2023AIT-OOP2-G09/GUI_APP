@@ -51,8 +51,11 @@ def address_get():
             if schedule_duplicate(new_schedule, existing_data):
                 return jsonify({"message": "同じ予定が既にあります"})
             
-            # 既存データに新しい予定を’追加
+            # 既存データに新しい予定を追加
             existing_data.append(new_schedule)
+
+            # 日付の降順でソート
+            existing_data.sort(key=lambda x: datetime.strptime(x["date"], "%Y/%m/%d"), reverse=False)
 
             # データをファイルに書き込む
             with open("schedule.json", "w") as f:
