@@ -42,13 +42,25 @@ GUIアプリ用のリポジトリ
 <br>
   │  └study.py（勉強時間のモジュール）
 <br>
-  ├[templates](webサイトのそれぞれのhtml)
+  ├[static]
+<br>
+  ├[css]
 <br>
   │  └index.css（カレンダーのCSS）
 <br>
-  │  └index.html（カレンダーのHTMl）
+  ├[javascript]
 <br>
   │  └index.js（カレンダーのJS）
+<br>  
+  │  └AddSchedule.js（追加ページのJS）
+<br>  
+  ├[templates](webサイトのそれぞれのhtml)
+<br>
+  │  └AddSchedule.html(追加ページのHTML)
+<br>
+  │  └index.html（カレンダーのHTMl）
+<br>
+  │  └list.html（予定一覧のHTML）
 <br>
   └k00000_12.md（報告書のテンプレート）
 <br>
