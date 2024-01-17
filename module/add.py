@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import json
 from datetime import datetime
 
@@ -8,14 +8,12 @@ app = Flask(__name__)
 # 重複確認
 def schedule_duplicate(new_schedule, existing_data):
     for item in existing_data:
-        if item in existing_data:
-            if (
-                item["date"] == new_schedule["date"]
-                and item["schedule"] == new_schedule["schedule"]
-                and item["time"] == new_schedule["time"]
-            ):
-                return True
-
+        if (
+            item["date"] == new_schedule["date"]
+            and item["schedule"] == new_schedule["schedule"]
+            and item["time"] == new_schedule["time"]
+        ):
+            return True
     return False
 
 
@@ -27,9 +25,10 @@ def address_get():
             # 検索パラメータの取得
             p_date = request.args.get("dt")
             p_schedule = request.args.get("sh")
-            p_time = request.args.get("tm")
+            # p_time = request.args.get("tm")
             # データを分ける
-            p_date_obje = datetime.strptime(p_date, "%Y/%m/%d").date()
+            if p_date is not None:
+                p_date_obje = datetime.strptime(p_date, "%Y-%m-%d").date()
             # 新しいデータの箱を作成
             new_schedule = {
                 "date": p_date_obje.strftime("%Y/%m/%d"),
