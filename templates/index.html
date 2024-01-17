@@ -1,42 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang='ja'>
+  <head>
+    <meta charset='utf-8'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+ </head>
 
-<head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/AddSchedule.css') }}">
-</head>
-
-<body>
-  <!-- タイトルおよびフォーム -->
-  <h2 style="text-align: center;">&emsp;予定追加</h2>
-  <hr size="5" noshade color="black" />
-
-  <!-- フォーム -->
-  <div class="center-form">
-    <font size="6" style="text-align: left;">
-      <form enctype="multipart/form-data" action="/add/to" method="post">
-        <!-- 日程入力フォーム -->
-        <div class="center-input">
-          <label for="year">日程: </label>
-          <input type="date" id="date" name="date">
-        </div>
-
-        <!-- 予定入力フォーム -->
-        <div class="center-input">
-          <label for="your_name">予定: </label>
-          <input type="text" id="schedule" name="schedule">
-        </div>
-
-        <!-- 送信ボタン -->
-        <button type="submit">追加</button>
-      </form>
-    </font>
+ <body>
+  <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
+  <div class="calendar_area">
+    <div class="calendar_header">
+      <p id="year_month_label"></p>
+      <button id="prev_year_btn" onClick="prev_year()"><i class="fas fa-angle-double-left"></i></button>
+      <button id="prev_month_btn" onClick="prev_month()"><i class="fas fa-angle-left"></i></button>
+      <button id="now_btn" onClick="now_month()"><i class="fas fa-circle"></i></button>
+      <button id="next_month_btn" onClick="next_month()"><i class="fas fa-angle-right"></i></button>
+      <button id="next_year_btn" onClick="next_year()"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+    <div id="calendar_body"></div>
+    <div class="button-container">
+      <a href="/add" class="btn btn--orange">追加</a>
+      <a href="/add" class="btn btn--orange">一覧</a>
+      <a href="/add" class="btn btn--orange">勉強</a>
+    </div>
   </div>
-
-  <!-- JavaScriptファイルの読み込み -->
-  <script src="{{ url_for('static', filename='javascript/AddSchedule.js') }}"></script>
-
-  <!-- 余白 -->
-  <p>&nbsp;</p>
-</body>
-
+ </body>
 </html>
