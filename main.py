@@ -6,17 +6,20 @@ from module.add import schedule_duplicate
 
 app = Flask(__name__)
 
+
 # 最初のカレンダーのページ
-@app.route('/')
+@app.route("/")
 def index():
     # ここにカレンダー表示のtemplateを返す
-    return render_template('index.html')
+    return render_template("index.html")
+
 
 # 予定追加のページ
-@app.route('/add')
+@app.route("/add")
 def add():
     # 予定追加のtemplateを返す
-    return render_template('AddSchedule.html')
+    return render_template("AddSchedule.html")
+
 
 # データ追加工程
 @app.route("/add/to", methods=["GET", "POST"])
@@ -27,9 +30,10 @@ def address_get():
             p_date = request.form.get("date")
             print(p_date)
             p_schedule = request.form.get("schedule")
-            # p_time = request.args.get("tm")
+            p_time = request.args.get("tm")
             # データを分ける
-            p_date_obje = datetime.strptime(p_date, "%Y/%m/%d").date()
+            if p_date is not None:
+                p_date_obje = datetime.strptime(p_date, "%Y-%m-%d").date()
             # 新しいデータの箱を作成
             new_schedule = {
                 "date": p_date_obje.strftime("%Y/%m/%d"),
@@ -53,6 +57,7 @@ def address_get():
             return jsonify({"message": str(e)})
 
     return render_template("add.html")
+
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
