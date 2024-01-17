@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- headセクションには特に必要なものがない場合、省略しても問題ありません -->
+</head>
+
+<body>
+  <!-- タイトルおよびフォーム -->
+  <h2 style="text-align: left;">&emsp;予定追加</h2>
+  <hr size="5" noshade color="black" />
+
+  <!-- フォーム -->
+  <font size="5" style="text-align: left;">
+    <form enctype="multipart/form-data" action="/add/to" method="post">
+      <!-- 日程入力フォーム -->
+      &emsp;日程<input type="date" id="date" required><br>
+
+      <!-- 予定入力フォーム -->
+      &emsp;予定<input type="text" id="schedule" required><br>
+
+      <!-- 送信ボタン -->
+      <input type="submit" value="追加">
+    </form>
+  </font>
+
+  <!-- JavaScriptファイルの読み込み -->
+  <script src="{{ url_for('static', filename='javascript/AddSchedule.js') }}"></script>
+
+  <!-- 余白 -->
+  <p>&nbsp;</p>
+</body>
+
+</html>
