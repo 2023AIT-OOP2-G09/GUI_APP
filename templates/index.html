@@ -2,12 +2,12 @@
 <html lang='ja'>
   <head>
     <meta charset='utf-8'>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
  </head>
 
  <body>
-  <script src="index.js"></script>
+  <script src="{{ url_for('static', filename='javascript/index.js') }}"></script>
   <div class="calendar_area">
     <div class="calendar_header">
       <p id="year_month_label"></p>
@@ -19,5 +19,8 @@
     </div>
     <div id="calendar_body"></div>
  </div>
+ <ol>
+  <li><a href="/add">予定追加ページ</a></li>
+ </ol>
  </body>
 </html>
