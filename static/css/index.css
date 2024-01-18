@@ -81,9 +81,11 @@
     text-align: center;
   }
 
+
+  /* 今日の日付の色変更 */
   .today {
-    background-color: #ffcc00; /* 例: イエローの背景色 */
-    color: #000000; /* 例: ブラックのテキスト色 */
+    background-color: #64a365; /* 例: イエローの背景色 */
+    color: #163622; /* 例: ブラックのテキスト色 */
     font-weight: bold; /* 例: 太字 */
   }
   
@@ -127,4 +129,10 @@
     letter-spacing: 0.1em;
     color: #212529;
    border-radius: 0.5rem;
+  }
+  schedule-info {
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: center;
+    vertical-align: middle;
   }
