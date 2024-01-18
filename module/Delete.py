@@ -1,8 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 import json 
 
-import json
-
 # JSONファイルの読み込み
 with open('your_file.json', 'r') as file:
     data = json.load(file)

@@ -20,6 +20,11 @@ def add():
     # 予定追加のtemplateを返す
     return render_template("AddSchedule.html")
 
+# 予定一覧のページ
+@app.route("/list")
+def list():
+    # 予定追加のtemplateを返す
+    return render_template("list.html")
 
 # データ追加工程
 @app.route("/add/to", methods=["GET", "POST"])
