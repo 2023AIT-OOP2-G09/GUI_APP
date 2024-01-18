@@ -4,8 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-
+  
   <title>予定追加</title>
   <style>
     body {
@@ -48,9 +47,40 @@
 
     /* ボタン要素のスタイル */
     input[type="submit"] {
-      background-color: #4caf50;
+      background: #494847;
       color: white;
       cursor: pointer;
+    }
+
+    /* ボタンコンテナのスタイル */
+    .button-container {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ボタンの共通スタイル */
+    .btn {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    /* 各ボタンの異なるスタイル */
+    .btn--add {
+      background: #494847;
+    }
+
+    .btn--back {
+      background: #494847;
+    }
+
+    .btn--study {
+      background: #494847;
     }
   </style>
 </head>
@@ -73,14 +103,15 @@
       <!-- 送信ボタン -->
       <input type="submit" class="btn btn--add" value="追加">
     </form>
-    <!-- ボタンコンテナ -->
+  </div>
+
+  <!-- ボタンコンテナ -->
   <div class="button-container">
-    <a href="/" class="btn btn--orange">戻る</a>
-    <a href="/list" class="btn btn--orange">一覧</a>
-    <a href="/study" class="btn btn--orange">勉強</a>
+    <a href="/" class="btn btn--add">戻る</a>
+    <a href="/list" class="btn btn--back">一覧</a>
+    <a href="/study" class="btn btn--study">勉強</a>
   </div>
-  </div>
-  
+
   <!-- JavaScriptファイルの読み込み -->
   <script src="{{ url_for('static', filename='javascript/AddSchedule.js') }}"></script>
 

@@ -13,7 +13,6 @@ def index():
     # ここにカレンダー表示のtemplateを返す
     return render_template("index.html")
 
-
 # 予定追加のページ
 @app.route("/add")
 def add():
