@@ -62,34 +62,46 @@ function createCalendarTable(year, month) {
   
   // 月の末日
   var monthOfEndDay = new Date(year, month, 0).getDate()
+
+  // 今日の日付を取得
+  var todayDate = today.getDate();
   
   // 6行分繰り返し
-  for (var i = 0; i < 6; i++) {
-    _html += '<tr>';
-    
-    // 7列（曜日の数）分繰り返し
-    for (var j = 0; j < week.length; j++) {
-      // １行目で開始曜日と同じ場合
-      if (i == 0 && j == startDayOfWeek) {
-        // 日付+1
-        countDay++;
-        // tdタグ（日付有りが分かるようにクラス属性に"with_date"を設定）
+for (var i = 0; i < 6; i++) {
+  _html += '<tr>';
+
+  // 7列（曜日の数）分繰り返し
+  for (var j = 0; j < week.length; j++) {
+    // １行目で開始曜日と同じ場合
+    if (i == 0 && j == startDayOfWeek) {
+      // 日付+1
+      countDay++;
+
+      // 今日の日付のセルに"today"クラスを適用
+      if (countDay === todayDate) {
+        _html += '<td class="with_date today">' + countDay + '</td>';
+      } else {
         _html += '<td class="with_date">' + countDay + '</td>';
-      }
-      // 日付が0以外で、日付が末日より小さい場合
-      else if (countDay != 0 && countDay < monthOfEndDay) {
-        // 日付+1
-        countDay++;
-        // tdタグ（日付有りが分かるようにクラス属性に"with_date"を設定）
-        _html += '<td class="with_date">' + countDay + '</td>';
-      }
-      else {
-        // tdタグ（日付無しが分かるようにクラス属性に"no_date"を設定）
-        _html += '<td class="no_date"></td>';
       }
     }
-    _html += '</tr>';
+    // 日付が0以外で、日付が末日より小さい場合
+    else if (countDay != 0 && countDay < monthOfEndDay) {
+      // 日付+1
+      countDay++;
+
+      // 今日の日付のセルに"today"クラスを適用
+      if (countDay === todayDate) {
+        _html += '<td class="with_date today">' + countDay + '</td>';
+      } else {
+        _html += '<td class="with_date">' + countDay + '</td>';
+      }
+    } else {
+      // tdタグ（日付無しが分かるようにクラス属性に"no_date"を設定）
+      _html += '<td class="no_date"></td>';
+    }
   }
+  _html += '</tr>';
+}
   _html += '</table>';
   
   // 組み立てたHTMLを返却
