@@ -69,7 +69,13 @@ def address_get():
             return render_template("index.html")
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
+        
 
+# 勉強時間のページ
+@app.route("/study")
+def study():
+    # 予定追加のtemplateを返す
+    return render_template("study.html")
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
