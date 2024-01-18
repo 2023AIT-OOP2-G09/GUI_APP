@@ -69,7 +69,13 @@ def address_get():
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
         
-
+@app.route('/getjson', methods=["GET","POST"])
+def getjson(): 
+    with open('schedule.json', 'r') as f:
+        scheduledata = json.load(f)
+    
+    # JSONデータを返す
+    return jsonify(scheduledata)
 # 勉強時間のページ
 @app.route("/study")
 def study():
