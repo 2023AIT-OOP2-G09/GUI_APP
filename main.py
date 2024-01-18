@@ -22,8 +22,9 @@ def add():
 # 予定一覧のページ
 @app.route("/list")
 def list():
-    # 予定追加のtemplateを返す
-    return render_template("list.html")
+    with open('schedule.json') as f:
+        schedule_data = json.load(f)
+    return render_template('list.html', schedule_data=schedule_data)
 
 # データ追加工程
 @app.route("/add/to", methods=["GET", "POST"])
