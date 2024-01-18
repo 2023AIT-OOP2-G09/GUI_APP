@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/AddSchedule.css') }}"/>
   <title>予定追加</title>
+  <style>
 </head>
 
 <body>
@@ -23,6 +24,10 @@
       <label for="schedule">予定</label>
       <input type="text" id="schedule" name="schedule" required>
 
+      <!-- 予定入力フォーム -->
+      <label for="schedule">時間</label>
+      <input type="time" id="time" name="time" required>
+
       <!-- 送信ボタン -->
       <input type="submit" class="btn btn--add" value="追加">
     </form>
@@ -30,9 +35,9 @@
 
   <!-- ボタンコンテナ -->
   <div class="button-container">
-    <a href="/" class="btn btn--add">戻る</a>
-    <a href="/list" class="btn btn--back">一覧</a>
-    <a href="/study" class="btn btn--study">勉強</a>
+    <a href="/" class="underbtn btn">戻る</a>
+    <a href="/list" class="underbtn btn">一覧</a>
+    <a href="/study" class="underbtn btn">勉強</a>
   </div>
 
   <!-- JavaScriptファイルの読み込み -->
