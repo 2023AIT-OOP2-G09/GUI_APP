@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/AddSchedule.css') }}"/>
   <title>予定追加</title>
-  <style>
 </head>
 
 <body>
@@ -42,6 +41,20 @@
 
   <!-- JavaScriptファイルの読み込み -->
   <script src="{{ url_for('static', filename='javascript/AddSchedule.js') }}"></script>
+
+  <script>
+    // ページを開いた時の現在時刻を取得
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+
+    // 0埋めして時刻のフォーマットを調整
+    var formattedHours = hours < 10 ? '0' + hours : hours;
+    var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+    // 時刻の初期値を設定
+    document.getElementById('time').value = formattedHours + ':' + formattedMinutes;
+  </script>
 
   <!-- 余白 -->
   <p>&nbsp;</p>
