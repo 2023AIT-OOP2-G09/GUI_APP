@@ -22,6 +22,11 @@ body {
     background-color: #f9f9f9;
   }
 
+  /* ボタンを包む要素に対して text-align: center; を追加 */
+  .button-container {
+    text-align: center;
+  }
+
   /* ボタンのスタイル */
   .btn--orange,
   a.btn--orange,
