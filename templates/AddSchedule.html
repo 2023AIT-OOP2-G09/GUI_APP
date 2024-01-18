@@ -71,17 +71,14 @@
     }
 
     /* 各ボタンの異なるスタイル */
-    .btn--add {
+    .underbtn{
       background: #494847;
+      padding: 20px; 
+      font-size: 26px; 
+      width: 150px; 
+    height: 40px;
     }
-
-    .btn--back {
-      background: #494847;
-    }
-
-    .btn--study {
-      background: #494847;
-    }
+    
   </style>
 </head>
 
@@ -100,6 +97,10 @@
       <label for="schedule">予定</label>
       <input type="text" id="schedule" name="schedule" required>
 
+      <!-- 予定入力フォーム -->
+      <label for="schedule">時間</label>
+      <input type="time" id="time" name="time" required>
+
       <!-- 送信ボタン -->
       <input type="submit" class="btn btn--add" value="追加">
     </form>
@@ -107,9 +108,9 @@
 
   <!-- ボタンコンテナ -->
   <div class="button-container">
-    <a href="/" class="btn btn--add">戻る</a>
-    <a href="/list" class="btn btn--back">一覧</a>
-    <a href="/study" class="btn btn--study">勉強</a>
+    <a href="/" class="underbtn btn">戻る</a>
+    <a href="/list" class="underbtn btn">一覧</a>
+    <a href="/study" class="underbtn btn">勉強</a>
   </div>
 
   <!-- JavaScriptファイルの読み込み -->
