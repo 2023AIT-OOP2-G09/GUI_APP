@@ -13,18 +13,21 @@ def index():
     # ここにカレンダー表示のtemplateを返す
     return render_template("index.html")
 
+
 # 予定追加のページ
 @app.route("/add")
 def add():
     # 予定追加のtemplateを返す
     return render_template("AddSchedule.html")
 
+
 # 予定一覧のページ
 @app.route("/list")
 def list():
-    with open('schedule.json') as f:
+    with open("schedule.json") as f:
         schedule_data = json.load(f)
-    return render_template('list.html', schedule_data=schedule_data)
+    return render_template("list.html", schedule_data=schedule_data)
+
 
 # データ追加工程
 @app.route("/add/to", methods=["GET", "POST"])
@@ -55,12 +58,14 @@ def address_get():
             # 重複チェック
             if schedule_duplicate(new_schedule, existing_data):
                 return jsonify({"message": "同じ予定が既にあります"})
-            
+
             # 既存データに新しい予定を追加
             existing_data.append(new_schedule)
 
             # 日付の降順でソート
-            existing_data.sort(key=lambda x: datetime.strptime(x["date"], "%Y/%m/%d"), reverse=False)
+            existing_data.sort(
+                key=lambda x: datetime.strptime(x["date"], "%Y/%m/%d"), reverse=False
+            )
 
             # データをファイルに書き込む
             with open("schedule.json", "w") as f:
@@ -69,13 +74,14 @@ def address_get():
             return render_template("index.html")
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
-        
+
 
 # 勉強時間のページ
 @app.route("/study")
 def study():
     # 予定追加のtemplateを返す
     return render_template("study.html")
+
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
