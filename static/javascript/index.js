@@ -144,52 +144,39 @@ function next_year() {
 }
 
 // スケジュールデータの取得
-function fetchScheduleData() {
-  return [
-    {
-      "date": "2024/01/11",
-      "schedule": "こんにちは",
-      "time": "0:00"
-    },
-    {
-      "date": "2024/01/12",
-      "schedule": "物理実習",
-      "time": "13:00"
-    },
-    {
-      "date": "2024/02/12",
-      "schedule": "物理実習",
-      "time": "13:00"
-    },
-    // Add more schedule data as needed
-  ];
+async function fetchScheduleData() {
+  try {
+    const response = await fetch('/fetch_schedule')
+    const scheduleData = await response.json();
+    return scheduleData;
+  } catch (error) {
+    console.error('Error fetch:', error);
+    return [];
+  }
+
 }
 //スケジュールデータの表示
 function renderScheduleData(scheduleData) {
- scheduleData.forEach(schedule => {
-   const day = new Date(schedule.date).getDate();
-   const cells = document.querySelectorAll('.with_date');
+  scheduleData.forEach(schedule => {
+    const day = new Date(schedule.date).getDate();
+    const cells = document.querySelectorAll('.with_date');
 
-   cells.forEach(cell => {
-     if (parseInt(cell.innerText) === day) {
-       const scheduleElement = document.createElement('div');
-       scheduleElement.className = 'schedule-info';
-       scheduleElement.innerHTML = schedule.schedule;
+    cells.forEach(cell => {
+      if (parseInt(cell.innerText) === day) {
+        const scheduleElement = document.createElement('div');
+        scheduleElement.className = 'schedule-info';
+        scheduleElement.innerHTML = schedule.schedule;
 
-       // Remove existing schedule-info div
-       const existingScheduleElement = cell.querySelector('.schedule-info');
-       if (existingScheduleElement) {
-         existingScheduleElement.remove();
-       }
+        // Remove existing schedule-info div
+        const existingScheduleElement = cell.querySelector('.schedule-info');
+        if (existingScheduleElement) {
+          existingScheduleElement.remove();
+        }
 
-       cell.appendChild(scheduleElement);
-     }
-   });
- });
+        cell.appendChild(scheduleElement);
+      }
+    });
+  });
 }
-window.onload = async function () {
-  showCalendar(showDate);
-  const scheduleData = await fetchScheduleData();
-  renderScheduleData(scheduleData);
-};
+
 
