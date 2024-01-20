@@ -10,6 +10,16 @@
 
   <body>
     <script src="{{ url_for('static', filename='javascript/list.js') }}"></script>
+    <form id="search">
+      <div>
+        <input type="date" id="date" name="date" min="1900-01-01" pattern="\d{4}-\d{2}-\d{2}">
+        <input type="time" id="search-Time" placeholder="Time" name="ln">
+        <input type="text" id="search-Schedule" placeholder="Schedule" name="em">
+        
+        <input type="button" id="search-submit" value="Search" onclick="searchOnClick();"/>
+      </div>
+    </form>
+
     <div class="schedule-container" id="scheduleContainer">
       {% for item in schedule_data %}
         <div class="schedule-item">
