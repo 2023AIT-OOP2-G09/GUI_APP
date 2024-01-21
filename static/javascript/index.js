@@ -32,7 +32,12 @@ function showCalendar(date) {
 
   // カレンダー表示部分に埋め込み
   document.querySelector('#calendar_body').innerHTML = calendarTable;
+
+  // スケジュールデータを再表示
+  const scheduleData = fetchScheduleData();
+  renderScheduleData(scheduleData);
 }
+
 
 // カレンダーテーブルの作成
 function createCalendarTable(year, month) {
@@ -142,12 +147,49 @@ function next_year() {
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
 }
+function renderScheduleData(scheduleData) {
+  const todayScheduleContainer = document.getElementById('today-schedule-container');
+  todayScheduleContainer.innerHTML = '<h3>今日の予定</h3>'; // 今日の予定の見出し
+
+  scheduleData.forEach(schedule => {
+    const day = new Date(schedule.date).getDate();
+    const month = new Date(schedule.date).getMonth();
+
+    const cells = document.querySelectorAll('.with_date');
+
+    cells.forEach(cell => {
+      if (parseInt(cell.innerText) === day && month === showDate.getMonth()) {
+        const scheduleElement = document.createElement('div');
+        scheduleElement.className = 'schedule-info';
+        scheduleElement.innerHTML = schedule.schedule;
+
+        // Remove existing schedule-info div
+        const existingScheduleElement = cell.querySelector('.schedule-info');
+        if (existingScheduleElement) {
+          existingScheduleElement.remove();
+        }
+
+        cell.appendChild(scheduleElement);
+      }
+    });
+
+    // 今日の予定を表示
+    const today = new Date();
+    if (day === today.getDate() && month === today.getMonth()) {
+      const scheduleElement = document.createElement('div');
+      scheduleElement.className = 'schedule-info';
+      scheduleElement.innerHTML = schedule.schedule;
+
+      todayScheduleContainer.appendChild(scheduleElement);
+    }
+  });
+}
 
 // スケジュールデータの取得
 function fetchScheduleData() {
   return [
     {
-      "date": "2024/01/11",
+      "date": "2024/01/21",
       "schedule": "こんにちは",
       "time": "0:00"
     },
@@ -164,32 +206,9 @@ function fetchScheduleData() {
     // Add more schedule data as needed
   ];
 }
-//スケジュールデータの表示
-function renderScheduleData(scheduleData) {
- scheduleData.forEach(schedule => {
-   const day = new Date(schedule.date).getDate();
-   const cells = document.querySelectorAll('.with_date');
-
-   cells.forEach(cell => {
-     if (parseInt(cell.innerText) === day) {
-       const scheduleElement = document.createElement('div');
-       scheduleElement.className = 'schedule-info';
-       scheduleElement.innerHTML = schedule.schedule;
-
-       // Remove existing schedule-info div
-       const existingScheduleElement = cell.querySelector('.schedule-info');
-       if (existingScheduleElement) {
-         existingScheduleElement.remove();
-       }
-
-       cell.appendChild(scheduleElement);
-     }
-   });
- });
-}
+// ウィンドウの読み込み完了時の処理
 window.onload = async function () {
   showCalendar(showDate);
   const scheduleData = await fetchScheduleData();
   renderScheduleData(scheduleData);
 };
-
