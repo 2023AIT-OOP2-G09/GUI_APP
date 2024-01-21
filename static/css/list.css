@@ -1,0 +1,95 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    }
+  
+  .schedule-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .schedule-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  /* ボタンを包む要素に対して text-align: center; を追加 */
+  .button-container {
+    text-align: center;
+  }
+
+  /* ボタンのスタイル */
+  .btn--orange,
+  a.btn--orange,
+  button.btn--orange {
+    color: #fff;
+    background-color: #c1bfbd;
+    margin: 10px; /* 上下左右のマージンを10pxに設定 */
+    padding: 10px 20px; /* 余白を追加 */
+    border-radius: 5px; /* 角を丸くする */
+  }
+
+  .btn--orange:hover,
+  a.btn--orange:hover,
+  button.btn--orange:hover {
+    color: #fff;
+    background: #494847;
+  }  
+  
+  .btn,
+  a.btn,
+  button.btn {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+   border-radius: 0.5rem;
+  }
+
+  /* 検索フォームを中央に配置し、サイズを調整するためのスタイルを追加 */
+#search {
+  text-align: center;
+  margin: 20px auto; /* 必要に応じてマージンを調整 */
+  max-width: 600px; /* フォームの最大幅を設定してサイズを制限 */
+}
+
+#search div {
+  display: flex;
+  justify-content: center;
+}
+
+#search input[type="text"],#search input[type="date"], #search input[type="time"]{
+  width: 80%; /* 必要に応じて幅を調整 */
+  padding: 10px; /* 外観を向上させるためにパディングを追加 */
+  margin: 5px; /* 入力フィールド間のスペーシングのためにマージンを追加 */
+}
+
+#search-submit {
+  width: auto; /* ボタンが内容に基づいて幅を調整できるようにする */
+  padding: 10px 20px; /* ボタンにパディングを追加 */
+  margin: 5px; /* スペーシングのためにマージンを追加 */
+}
+

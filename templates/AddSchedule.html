@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/AddSchedule.css') }}"/>
   <title>予定追加</title>
   <style>
     body {
@@ -71,17 +71,14 @@
     }
 
     /* 各ボタンの異なるスタイル */
-    .btn--add {
+    .underbtn{
       background: #494847;
+      padding: 20px; 
+      font-size: 26px; 
+      width: 150px; 
+    height: 40px;
     }
-
-    .btn--back {
-      background: #494847;
-    }
-
-    .btn--study {
-      background: #494847;
-    }
+    
   </style>
 </head>
 
@@ -100,6 +97,10 @@
       <label for="schedule">予定</label>
       <input type="text" id="schedule" name="schedule" required>
 
+      <!-- 予定入力フォーム -->
+      <label for="schedule">時間</label>
+      <input type="time" id="time" name="time" required>
+
       <!-- 送信ボタン -->
       <input type="submit" class="btn btn--add" value="追加">
     </form>
@@ -107,13 +108,39 @@
 
   <!-- ボタンコンテナ -->
   <div class="button-container">
-    <a href="/" class="btn btn--add">戻る</a>
-    <a href="/list" class="btn btn--back">一覧</a>
-    <a href="/study" class="btn btn--study">勉強</a>
+    <a href="/" class="underbtn btn">戻る</a>
+    <a href="/list" class="underbtn btn">一覧</a>
+    <a href="/study" class="underbtn btn">勉強</a>
   </div>
 
   <!-- JavaScriptファイルの読み込み -->
   <script src="{{ url_for('static', filename='javascript/AddSchedule.js') }}"></script>
+
+  <script>
+    // ページを開いた時の現在時刻を取得
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+
+    // 0埋めして時刻のフォーマットを調整
+    var formattedHours = hours < 10 ? '0' + hours : hours;
+    var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+
+    // 時刻の初期値を設定
+    document.getElementById('time').value = formattedHours + ':' + formattedMinutes;
+
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1; // JavaScriptでは0から始まるため、1を加える
+    var day = now.getDate();
+
+    // 0埋めして日程のフォーマットを調整
+    var formattedMonth = month < 10 ? '0' + month : month;
+    var formattedDay = day < 10 ? '0' + day : day;
+
+    // 日程の初期値を設定
+    document.getElementById('date').value = year + '-' + formattedMonth + '-' + formattedDay;
+  </script>
 
   <!-- 余白 -->
   <!-- 今日の予定一覧を表示する div -->
