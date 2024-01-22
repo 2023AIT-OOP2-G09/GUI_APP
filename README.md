@@ -33,62 +33,33 @@ GUIアプリ用のリポジトリ
 - 勉強時間を円グラフで見ることができる
 
 ## ディレクトリの構造
-[GUI_APP]
-<br>
-  ├[app_images]（アプリのイメージ・企画書）
-<br>
-  │  └オブジェクト演習GUIアプリ案＿柴田.pdf
-<br>
-  │  └カレンダー.png
-<br>
-  │  └勉強時間.jpg
-<br>
-  │  └予定の追加.jpg
-<br>
-  │  └予定一覧.jpg
-<br>
-  ├[module]（追加、削除、勉強時間のモジュール）
-<br>
-  │  └add.py（追加のモジュール）
-<br>
-  │  └Delete.py（削除のモジュール）
-<br>
-  │  └study.py（勉強時間のモジュール）
-<br>
-  ├[static]
-<br>
-  ├[css]
-<br>
-  │  └AddSchedule.css（追加ページのCSS）
-<br>
-  │  └index.css（カレンダーのCSS）
-<br>
-  │  └list.css（一覧のCSS）
-<br>
-  ├[javascript]
-<br>
-  │  └AddSchedule.js（追加ページのJS）
-<br>  
-  │  └index.js（カレンダーのJS）
-<br>
-  │  └list.js（一覧ページのJS）
-<br>    
-  ├[templates](webサイトのそれぞれのhtml)
-<br>
-  │  └AddSchedule.html(追加ページのHTML)
-<br>
-  │  └index.html（カレンダーのHTMl）
-<br>
-  │  └list.html（予定一覧のHTML）
-<br>
-  │  └study.js（勉強ページのHTML）
-<br>  
-  └k00000_12.md（12回報告書のテンプレート）
-<br>  
-  └k00000_13.md（13回報告書のテンプレート）
-<br>
-  └main.py (frask側のプログラム)
-<br>
-  └README.md
-<br>
-  └schedule.json（スケジュールのデータ）
+- **[GUI_APP]**
+  - **[app_images]**
+    - オブジェクト演習GUIアプリ案＿柴田.pdf
+    - カレンダー.png
+    - 勉強時間.jpg
+    - 予定の追加.jpg
+    - 予定一覧.jpg
+  - **[module]**
+    - add.py（追加のモジュール）
+    - Delete.py（削除のモジュール）
+    - study.py（勉強時間のモジュール）
+  - **[static]**
+  - **[css]**
+    - AddSchedule.css（追加ページのCSS）
+    - index.css（カレンダーのCSS）
+    - list.css（一覧のCSS）
+  - **[javascript]**
+    - AddSchedule.js（追加ページのJS）
+    - index.js（カレンダーのJS）
+    - list.js（一覧ページのJS）
+  - **[templates]**
+    - AddSchedule.html（追加ページのHTML）
+    - index.html（カレンダーのHTML）
+    - list.html（予定一覧のHTML）
+    - study.html（勉強ページのHTML）
+  - k00000_12.md（12回報告書のテンプレート）
+  - k00000_13.md（13回報告書のテンプレート）
+  - main.py（Flask側のプログラム）
+  - README.md
+  - schedule.json（スケジュールのデータ）
