@@ -4,145 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/study.css') }}" />
     <title>Daily Study Time Pie Chart</title>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column; /* ボタンを縦に配置するための変更 */
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        #chart-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin-bottom: 60px;
-        }
-
-        #pie-chart {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-
-        #chart-label {
-            position: absolute;
-            top: 50%;
-            left: calc(100% + 20px); 
-            transform: translate(-50%, -50%);
-            white-space: nowrap; /* テキストが折り返されないようにする */
-            text-align: center;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .button-container {
-        display: flex;
-        justify-content: space-around; /* ボタンを中央寄せにするための変更 */
-        width: 100%;
-        
-    }
-
-
-    .btn {
-        text-decoration: none;
-        padding: 100px 100px;
-        margin: 0;
-        border: 1px solid #FFA500;
-        color: hsl(39, 100%, 50%);
-        border-radius: 5px;
-        text-align: center;
-        display: inline-block;
-    }
-
-        .btn:hover {
-            background-color: #FFA500;
-            color: #fff;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="chart-container">
-        <canvas id="pie-chart"></canvas>
-        <div id="chart-label"></div>
-    </div>
+  <div id="chart-container">
+      <canvas id="pie-chart"></canvas>
+      <div id="chart-label"></div>
+  </div>
 
-    <div class="button-container">
-        <a href="/add" class="btn btn--orange">追加</a>
-        <a href="/list" class="btn btn--orange">一覧</a>
-        <a href="/" class="btn btn--orange">戻る</a>
-    </div>
-
-
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // JSONデータ
-      const jsonData = [
-        {"date": "2024/01/09", "schedule": "こんにちは", "studyTime": 2},
-        {"date": "2024/01/11", "schedule": "こんにちは", "studyTime": 3},
-        {"date": "2024/01/12", "schedule": "物理実習", "studyTime": 4},
-        {"date": "2024/01/13", "schedule": "プログラミング実習", "studyTime": 5},
-        {"date": "2024/01/17", "schedule": "予定の追加（例）", "studyTime": 1},
-        {"date": "2024/02/01", "schedule": "予定の追加（例２）", "studyTime": 2}
-      ];//書き換え
-
-      // 勉強時間データを処理して配列に変換
-      const studyTimeData = jsonData.map(item => item.studyTime);
-
-      // Chart.jsを使用して円グラフを描画
-      const ctx = document.getElementById('pie-chart').getContext('2d');
-      const pieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: jsonData.map(item => item.schedule),
-          datasets: [{
-            data: studyTimeData,
-            backgroundColor: [
-              'red', 'blue', 'green', 'orange', 'purple', 'pink'
-            ]
-          }]
-        },
-        options: {
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                const dataIndex = tooltipItem.index;
-                const label = data.labels[dataIndex];
-                const studyTime = jsonData[dataIndex].studyTime;
-                return `${label}: ${studyTime} hours`;
-              }
-            }
-          }
-        }
-      });
-
-      // 一番多い時間と勉強名を表示
-      const maxIndex = studyTimeData.indexOf(Math.max(...studyTimeData));
-      const maxLabel = jsonData[maxIndex].schedule;
-      const maxStudyTime = studyTimeData[maxIndex];
-      const chartLabel = document.getElementById('chart-label');
-      chartLabel.innerHTML = `${maxLabel}<br>${maxStudyTime} hours`;
-
-      // ホバー時のイベントリスナー
-      document.getElementById('pie-chart').addEventListener('mousemove', function(event) {
-        const activePoint = pieChart.getElementsAtEventForMode(event, 'nearest', {intersect: true}, false)[0];
-        if (activePoint) {
-          chartLabel.style.opacity = 1;
-          chartLabel.style.top = `${activePoint.y}px`;
-          chartLabel.style.left = `${activePoint.x}px`;
-        } else {
-          chartLabel.style.opacity = 0;
-        }
-      });
-    });
-  </script>
+  <script src="{{ url_for('static', filename='javascript/study.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  
+  <div class="button-container">
+    <a href="/add" class="btn btn--orange">追加</a>
+    <a href="/list" class="btn btn--orange">一覧</a>
+    <a href="/" class="btn btn--orange">戻る</a>
+  </div>
 </body>
 </html>
