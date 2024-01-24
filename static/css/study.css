@@ -1,0 +1,96 @@
+body {
+    /* ページ全体を中央に寄せるスタイル */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 画面の高さいっぱいに表示 */
+    margin: 0;
+}
+
+#chart-container {
+    /* チャートのコンテナスタイル */
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 60px;
+}
+
+#pie-chart {
+    /* パイチャートのスタイル */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#chart-label {
+    /* チャートのラベルのスタイル */
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 20px);
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* テキストが折り返されないようにする */
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+.button-container {
+    /* ボタンを横に並べ、センターに配置するスタイル */
+    display: flex;
+    justify-content: center; /* ボタンをセンターに配置 */
+    width: 100%;
+    flex-wrap: nowrap; /* ボタンを折り返さないようにする */
+}
+
+.underbtn {
+    /* 特定のスタイルを持つボタンのスタイル */
+    background: #494847;
+    padding: 20px;
+    font-size: 26px;
+    width: 150px;
+    height: 40px;
+}
+
+.btn--orange,
+a.btn--orange,
+button.btn--orange {
+    /* オレンジのボタンスタイル */
+    color: #fff;
+    background-color: #c1bfbd;
+    margin: 10px; /* 上下左右のマージンを10pxに設定 */
+    border-radius: 5px; /* 角を丸くする */
+}
+
+.btn--orange:hover,
+a.btn--orange:hover,
+button.btn--orange:hover {
+    /* オレンジのボタンのホバースタイル */
+    color: #fff;
+    background: #494847;
+}
+
+.btn,
+a.btn,
+button.btn {
+    /* ボタンの基本スタイル */
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 4rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border-radius: 0.5rem;
+}

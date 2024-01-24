@@ -41,6 +41,7 @@ GUIアプリ用のリポジトリ
 <img src="app_images/study.png" width="500">
 
 ## ディレクトリの構造
+```
 - **[GUI_APP]**
   - **[app_images]**
     - オブジェクト演習GUIアプリ案＿柴田.pdf
@@ -71,3 +72,4 @@ GUIアプリ用のリポジトリ
   - main.py（Flask側のプログラム）
   - README.md
   - schedule.json（スケジュールのデータ）
+```
