@@ -136,3 +136,18 @@
     text-align: center;
     vertical-align: middle;
   }
+  #today_schedule_container {
+    text-align: center;
+    margin:  auto;
+  }
+  
+  #today_schedule_label {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 24px;
+  }
+
+  .h1 {
+    margin: 0 auto;
+    text-align: center;
+  }
