@@ -8,11 +8,7 @@ var today = new Date();
 var showDate = new Date(today.getFullYear(), today.getMonth(), 1);
 
 // 表示された時
-window.onload = async function () {
-  showCalendar(showDate);
-  const scheduleData = await fetchScheduleData();
-  renderScheduleData(scheduleData);
-};
+
 
 // カレンダーの表示
 function showCalendar(date) {
@@ -109,6 +105,7 @@ function prev_year() {
   showDate.setFullYear(showDate.getFullYear() - 1);
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
+  renderScheduleData();
 }
 
 // 前月
@@ -117,6 +114,7 @@ function prev_month() {
   showDate.setMonth(showDate.getMonth() - 1);
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
+  renderScheduleData();
 }
 
 // 今日
@@ -125,6 +123,7 @@ function now_month() {
   showDate = new Date();
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
+  renderScheduleData();
 }
 
 // 来月
@@ -133,6 +132,7 @@ function next_month() {
   showDate.setMonth(showDate.getMonth() + 1);
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
+  renderScheduleData();
 }
 
 // 来年
@@ -141,42 +141,148 @@ function next_year() {
   showDate.setFullYear(showDate.getFullYear() + 1);
   // カレンダーの表示（引数には表示用の日付を設定）
   showCalendar(showDate);
+  renderScheduleData();
 }
+
 
 // スケジュールデータの取得
 async function fetchScheduleData() {
   try {
-    const response = await fetch('/fetch_schedule')
+    const response = await fetch('/fetch_schedule');
     const scheduleData = await response.json();
     return scheduleData;
   } catch (error) {
     console.error('Error fetch:', error);
     return [];
   }
-
 }
-//スケジュールデータの表示
-function renderScheduleData(scheduleData) {
-  scheduleData.forEach(schedule => {
-    const day = new Date(schedule.date).getDate();
-    const cells = document.querySelectorAll('.with_date');
 
-    cells.forEach(cell => {
-      if (parseInt(cell.innerText) === day) {
-        const scheduleElement = document.createElement('div');
-        scheduleElement.className = 'schedule-info';
-        scheduleElement.innerHTML = schedule.schedule;
+// スケジュールデータの表示
+function renderTodaySchedule() {
+  fetchScheduleData().then(scheduleData => {
+    const todayScheduleContainer = document.getElementById('today_schedule_container');
+    todayScheduleContainer.innerHTML = ''; // 以前のコンテンツをクリア
 
-        // Remove existing schedule-info div
-        const existingScheduleElement = cell.querySelector('.schedule-info');
-        if (existingScheduleElement) {
-          existingScheduleElement.remove();
-        }
+    const todaySchedule = scheduleData.find(schedule => {
+      const scheduleYear = new Date(schedule.date).getFullYear();
+      const scheduleMonth = new Date(schedule.date).getMonth() + 1;
+      const scheduleDay = new Date(schedule.date).getDate();
 
-        cell.appendChild(scheduleElement);
-      }
+      return (
+        showDate.getFullYear() === scheduleYear &&
+        (showDate.getMonth() + 1) === scheduleMonth &&
+        today.getDate() === scheduleDay
+      );
     });
+
+    if (todaySchedule) {
+      const todayScheduleElement = document.createElement('div');
+      todayScheduleElement.className = 'schedule-info';
+      todayScheduleElement.innerHTML = todaySchedule.schedule;
+
+      todayScheduleContainer.appendChild(todayScheduleElement);
+    }
+  }).catch(error => {
+    console.error('Error rendering today schedule:', error);
   });
 }
+// スケジュールデータの表示
+async function renderScheduleData() {
+  try {
+    const scheduleData = await fetchScheduleData();
+    const currentYear = showDate.getFullYear();
+    const currentMonth = showDate.getMonth() + 1;
 
+    // カレンダーのセルにスケジュールを表示
+    scheduleData.forEach(schedule => {
+      const scheduleYear = new Date(schedule.date).getFullYear();
+      const scheduleMonth = new Date(schedule.date).getMonth() + 1;
 
+      // 年と月が一致する場合のみ表示
+      if (currentYear === scheduleYear && currentMonth === scheduleMonth) {
+        const day = new Date(schedule.date).getDate();
+        const cells = document.querySelectorAll('.with_date');
+
+        cells.forEach(cell => {
+          if (parseInt(cell.innerText) === day) {
+            const scheduleElement = document.createElement('div');
+            scheduleElement.className = 'schedule-info';
+            scheduleElement.innerHTML = schedule.schedule;
+
+            // 既存の schedule-info div を削除
+            const existingScheduleElement = cell.querySelector('.schedule-info');
+            if (existingScheduleElement) {
+              existingScheduleElement.remove();
+            }
+
+            cell.appendChild(scheduleElement);
+          }
+        });
+      }
+    });
+
+    // 今日の予定を表示するコンテナ
+    const todayScheduleContainer = document.getElementById('today_schedule_container');
+    todayScheduleContainer.innerHTML = ''; // 以前のコンテンツをクリア
+
+    // 今日の予定を取得
+    const todaySchedule = scheduleData.find(schedule => {
+      const scheduleYear = new Date(schedule.date).getFullYear();
+      const scheduleMonth = new Date(schedule.date).getMonth() + 1;
+      const scheduleDay = new Date(schedule.date).getDate();
+
+      return (
+        showDate.getFullYear() === scheduleYear &&
+        (showDate.getMonth() + 1) === scheduleMonth &&
+        today.getDate() === scheduleDay
+      );
+    });
+
+    // 今日の予定が存在する場合、表示する
+    if (todaySchedule) {
+      const todayScheduleElement = document.createElement('div');
+      todayScheduleElement.className = 'schedule-info';
+      todayScheduleElement.innerHTML = todaySchedule.schedule;
+
+      todayScheduleContainer.appendChild(todayScheduleElement);
+    }
+  } catch (error) {
+    console.error('Error rendering schedule data:', error);
+  }
+}
+
+// 表示された時
+window.onload = function () {
+  // カレンダーの表示
+  showCalendar(showDate);
+
+  // 「今日の予定」テキストを表示する要素
+  var todayScheduleLabel = document.createElement('div');
+  todayScheduleLabel.id = 'today_schedule_label';
+  todayScheduleLabel.innerText = '今日の予定';
+
+  // ボタンの下に今日の予定を表示するためのコンテナ
+  var todayScheduleContainer = document.createElement('div');
+  todayScheduleContainer.id = 'today_schedule_container';
+  
+  // 今日の予定を表示するコンテナ
+  var todayScheduleElement = document.createElement('div');
+  todayScheduleElement.id = 'today_schedule_element';
+  todayScheduleContainer.appendChild(todayScheduleElement);
+
+  // 今日の予定のテキストを追加
+  todayScheduleContainer.appendChild(todayScheduleLabel);
+
+  // ボディにコンテナを追加
+  document.body.appendChild(todayScheduleContainer);
+
+  // スケジュールデータの取得と表示
+  fetchScheduleData().then(scheduleData => {
+    renderScheduleData(scheduleData);
+
+    // 今日の予定の表示
+    renderTodaySchedule(scheduleData);
+  }).catch(error => {
+    console.error('Error fetching schedule data:', error);
+  });
+};
