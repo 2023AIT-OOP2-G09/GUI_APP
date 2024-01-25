@@ -92,13 +92,18 @@ def address_delete():
 
         # 削除したい日付をform`date_delete`から取得
         target_date = request.form.get("date_delete")
-
+        print("Target Date:", target_date)  #
+        target_date_obj = datetime.strptime(target_date, "%Y-%m-%d")
+        target_date_str_formatted = target_date_obj.strftime("%Y/%m/%d")
+        print("Target Date:", target_date)  #
         # 指定した日付を含むデータを検索して削除
-        filtered_data = [entry for entry in data if entry['date_delete'] != target_date]
-
+        print(data)
+        filtered_data = [entry for entry in data if entry['date'] != target_date_str_formatted]
+        
         # 変更を保存
         with open('schedule.json', 'w') as file:
             json.dump(filtered_data, file, indent=2)
+        
         return render_template("index.html")
 
 # 勉強時間のページ
