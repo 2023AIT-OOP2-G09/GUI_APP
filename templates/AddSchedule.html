@@ -9,7 +9,7 @@
 </head>
 
 <body>
-  <!-- フォーム -->
+  <!-- 追加フォーム -->
   <div class="form-container">
     <h2>予定追加</h2>
     <hr size="5" noshade color="black" />
@@ -29,6 +29,21 @@
 
       <!-- 送信ボタン -->
       <input type="submit" class="btn btn--add" value="追加">
+    </form>
+  </div>
+
+  <!-- 削除フォーム -->
+  <div class="form-container">
+    <h2>予定削除</h2>
+    <hr size="5" noshade color="black" />
+
+    <form enctype="multipart/form-data" action="/add/date_delete" method="post">
+      <!-- 日程入力フォーム -->
+      <label for="date">日程</label>
+      <input type="date" id="date_delete" name="date_delete" required>
+
+      <!-- 送信ボタン -->
+      <input type="submit" class="btn btn--add" value="削除">
     </form>
   </div>
 
