@@ -67,16 +67,29 @@
 </head>
 
 <body>
-    <div id="chart-container">
-        <canvas id="pie-chart"></canvas>
-        <div id="chart-label"></div>
-    </div>
+  <div id="chart-container">
+    <canvas id="pie-chart"></canvas>
+    <div id="chart-label"></div>
+  </div>
 
-    <div class="button-container">
-        <a href="/add" class="btn btn--orange">追加</a>
-        <a href="/list" class="btn btn--orange">一覧</a>
-        <a href="/" class="btn btn--orange">戻る</a>
-    </div>
+  <form enctype="multipart/form-data" action="/study/to" method="post">
+    <!-- 予定入力フォーム -->
+    <label for="schedule">時間</label>
+    <input type="number" id="study_time" name="study_time" min= "0" required>時間
+
+    <label for="schedule">勉強内容</label>
+    <input type="text" id="study_schedule" name="study_schedule" required>
+
+    <!-- 送信ボタン -->
+    <input type="submit" class="btn btn--add" value="追加">
+  </form>
+  
+
+  <div class="button-container">
+    <a href="/add" class="btn btn--orange">追加</a>
+    <a href="/list" class="btn btn--orange">一覧</a>
+    <a href="/" class="btn btn--orange">戻る</a>
+  </div>
 
 
   <script>
