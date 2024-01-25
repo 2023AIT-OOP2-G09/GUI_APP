@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 
 from module.add import schedule_duplicate
+from module.study import study_duplicate
 
 app = Flask(__name__)
 
@@ -84,8 +85,51 @@ def address_get():
 
 
 # 勉強時間のページ
-@app.route("/study")
+@app.route("/study", methods=["GET", "POST"])
 def study():
+    if request.method == "POST":
+        try:
+            # 検索パラメータの取得
+            p_date = request.form.get("date")
+            print(p_date)
+            p_study_schedule = request.form.get("study_schedule")
+            p_study_time = request.args.get("tm")
+
+            # データを分ける
+            if p_date is not None:
+                p_date_obje = datetime.strptime(p_date, "%Y-%m-%d").date()
+
+            # 新しいデータの箱を作成
+            new_study = {
+                "date": p_date_obje.strftime("%Y/%m/%d"),
+                "study_schedule": p_study_schedule,
+                "study_time": "0:00",  # この時間はとりあえず初期値
+            }
+
+            # 既存データ読み込み
+            with open("study.json") as f:
+                existing_data = json.load(f)
+
+            # 重複チェック
+            if study_duplicate(new_study, existing_data):
+                return jsonify({"message": "同じ予定が既にあります"})
+
+            # 既存データに新しい予定を追加
+            existing_data.append(new_study)
+
+            # 日付の降順でソート
+            existing_data.sort(
+                key=lambda x: datetime.strptime(x["date"], "%Y/%m/%d"), reverse=False
+            )
+
+            # データをファイルに書き込む
+            with open("study.json", "w") as f:
+                json.dump(existing_data, f, indent=2, ensure_ascii=False)
+
+            return render_template("index.html")
+        except Exception as e:
+            return jsonify({"message": "エラーが発生しました"})
+
     # 予定追加のtemplateを返す
     return render_template("study.html")
 

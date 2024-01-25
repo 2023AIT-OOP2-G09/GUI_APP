@@ -1,6 +1,6 @@
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, render_template, request, jsonify
 import json
-
+from datetime import datetime
 app = Flask(__name__)
 @app.route('/address', methods=["GET"])
 def address_get():
@@ -38,3 +38,16 @@ def address_post():
         return jsonify({"message": "Data added successfully!"})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+def study_duplicate(new_study, existing_data):
+    for item in existing_data:
+        if (
+            item["date"] == new_study["date"]
+            and item["study_schedule"] == new_study["study_schedule"]
+            and item["study_time"] == new_study["study_time"]
+        ):
+            return True
+    return False
+
+if __name__ == "__main__":
+    app.run(debug=True)
