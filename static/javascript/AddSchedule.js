@@ -2,11 +2,13 @@ function showMessage() {
     // HTMLからデータを取得
     let date = document.getElementById('date').value;
     let schedule = document.getElementById('schedule').value;
+    let time = document.getElementById('time').value;
 
     // データをJSON形式に変換
     let dataFromHTML = {
         date: date,
-        schedule: schedule
+        schedule: schedule,
+        time: time
     };
 
     // JSONを表示

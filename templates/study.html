@@ -10,6 +10,78 @@
 
 <body>
   <div id="chart-container">
+    <canvas id="pie-chart"></canvas>
+    <div id="chart-label"></div>
+  </div>
+
+  <form enctype="multipart/form-data" action="/study/to" method="post">
+    <!-- 予定入力フォーム -->
+    <label for="schedule">時間</label>
+    <input type="number" id="study_time" name="study_time" min= "0" required>時間
+
+    <label for="schedule">勉強内容</label>
+    <input type="text" id="study_schedule" name="study_schedule" required>
+
+    <!-- 送信ボタン -->
+    <input type="submit" class="btn btn--add" value="追加">
+  </form>
+  
+
+  <div class="button-container">
+    <a href="/add" class="btn btn--orange">追加</a>
+    <a href="/list" class="btn btn--orange">一覧</a>
+    <a href="/" class="btn btn--orange">戻る</a>
+  </div>
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // JSONデータ
+      const jsonData = [
+        {"date": "2024/01/09", "schedule": "こんにちは", "studyTime": 2},
+        {"date": "2024/01/11", "schedule": "こんにちは", "studyTime": 3},
+        {"date": "2024/01/12", "schedule": "物理実習", "studyTime": 4},
+        {"date": "2024/01/13", "schedule": "プログラミング実習", "studyTime": 5},
+        {"date": "2024/01/17", "schedule": "予定の追加（例）", "studyTime": 1},
+        {"date": "2024/02/01", "schedule": "予定の追加（例２）", "studyTime": 2}
+      ];//書き換え
+
+      // 勉強時間データを処理して配列に変換
+      const studyTimeData = jsonData.map(item => item.studyTime);
+
+      // Chart.jsを使用して円グラフを描画
+      const ctx = document.getElementById('pie-chart').getContext('2d');
+      const pieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: jsonData.map(item => item.schedule),
+          datasets: [{
+            data: studyTimeData,
+            backgroundColor: [
+              'red', 'blue', 'green', 'orange', 'purple', 'pink'
+            ]
+          }]
+        },
+        options: {
+          tooltips: {
+            callbacks: {
+              label: function(tooltipItem, data) {
+                const dataIndex = tooltipItem.index;
+                const label = data.labels[dataIndex];
+                const studyTime = jsonData[dataIndex].studyTime;
+                return `${label}: ${studyTime} hours`;
+              }
+            }
+          }
+        }
+      });
+
+      // 一番多い時間と勉強名を表示
+      const maxIndex = studyTimeData.indexOf(Math.max(...studyTimeData));
+      const maxLabel = jsonData[maxIndex].schedule;
+      const maxStudyTime = studyTimeData[maxIndex];
+      const chartLabel = document.getElementById('chart-label');
+      chartLabel.innerHTML = `${maxLabel}<br>${maxStudyTime} hours`;
       <canvas id="pie-chart"></canvas>
       <div id="chart-label"></div>
   </div>

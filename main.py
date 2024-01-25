@@ -112,6 +112,37 @@ def study():
     # 予定追加のtemplateを返す
     return render_template("study.html")
 
+# 勉強時間追加のページ
+@app.route("/study/to", methods=["GET", "POST"])
+def study_add():
+    if request.method == "POST":
+        try:
+            # フォームデータの取得
+            p_time = request.form.get("time")
+
+            # 新しいデータの箱を作成
+            new_schedule = {
+                "time": int(p_time),
+            }
+
+            # 既存データ読み込み
+            with open("study.json") as f:
+                existing_data = json.load(f)
+
+            # 重複チェック
+            if schedule_duplicate(new_schedule, existing_data):
+                return jsonify({"message": "同じ予定が既にあります"})
+
+            # 既存データに新しい予定を追加
+            existing_data.append(new_schedule)
+            # データをファイルに書き込む
+            with open("study.json", "w") as f:
+                json.dump(existing_data, f, indent=2, ensure_ascii=False)
+
+            return render_template("index.html")
+        except Exception as e:
+            return jsonify({"message": "エラーが発生しました"})
+
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
