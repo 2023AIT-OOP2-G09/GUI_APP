@@ -45,7 +45,7 @@ def address_get():
             p_date = request.form.get("date")
             print(p_date)
             p_schedule = request.form.get("schedule")
-            p_time = request.args.get("tm")
+            p_time = request.form.get("time")
 
             # データを分ける
             if p_date is not None:
@@ -55,7 +55,7 @@ def address_get():
             new_schedule = {
                 "date": p_date_obje.strftime("%Y/%m/%d"),
                 "schedule": p_schedule,
-                "time": "0:00",  # この時間はとりあえず初期値
+                "time": p_time,  # この時間はとりあえず初期値
             }
 
             # 既存データ読み込み
