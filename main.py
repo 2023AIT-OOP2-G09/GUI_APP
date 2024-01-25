@@ -81,7 +81,30 @@ def address_get():
             return render_template("index.html")
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
+        
+# 予定削除のページ
+@app.route("/add/date_delete", methods=["GET", "POST"])
+def address_delete():
+    if request.method == "POST":
+        # JSONファイルの読み込み
+        with open('schedule.json', 'r') as file:
+            data = json.load(file)
 
+        # 削除したい日付をform`date_delete`から取得
+        target_date = request.form.get("date_delete")
+        print("Target Date:", target_date)  #
+        target_date_obj = datetime.strptime(target_date, "%Y-%m-%d")
+        target_date_str_formatted = target_date_obj.strftime("%Y/%m/%d")
+        print("Target Date:", target_date)  #
+        # 指定した日付を含むデータを検索して削除
+        print(data)
+        filtered_data = [entry for entry in data if entry['date'] != target_date_str_formatted]
+        
+        # 変更を保存
+        with open('schedule.json', 'w') as file:
+            json.dump(filtered_data, file, indent=2)
+        
+        return render_template("index.html")
 
 # 勉強時間のページ
 @app.route("/study")
