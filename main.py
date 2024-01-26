@@ -6,7 +6,6 @@ from module.add import schedule_duplicate
 
 app = Flask(__name__)
 
-
 # 最初のカレンダーのページ
 @app.route("/")
 def index():
@@ -82,7 +81,7 @@ def address_get():
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
         
-# 予定削除のページ
+# データ削除工程
 @app.route("/add/date_delete", methods=["GET", "POST"])
 def address_delete():
     if request.method == "POST":
@@ -109,40 +108,47 @@ def address_delete():
 # 勉強時間のページ
 @app.route("/study")
 def study():
-    # 予定追加のtemplateを返す
-    return render_template("study.html")
+    with open("study.json") as f:
+        study_data = json.load(f)
+    return render_template("study.html", study_data=study_data)
 
 # 勉強時間追加のページ
 @app.route("/study/to", methods=["GET", "POST"])
 def study_add():
     if request.method == "POST":
         try:
-            # フォームデータの取得
-            p_time = request.form.get("time")
+            # 検索パラメータの取得
+            s_time = request.form.get("study_time")
+            s_schedule = request.form.get("study_schedule")
+
+            # 勉強時間が0の場合は追加せずに終了
+            if s_time == "0":
+                return render_template("index.html")
 
             # 新しいデータの箱を作成
             new_schedule = {
-                "time": int(p_time),
+                "study_time": s_time,
+                "study_schedule": s_schedule,
             }
 
             # 既存データ読み込み
             with open("study.json") as f:
                 existing_data = json.load(f)
 
-            # 重複チェック
-            if schedule_duplicate(new_schedule, existing_data):
-                return jsonify({"message": "同じ予定が既にあります"})
+            # 既存データ表示
+            print(existing_data)
 
             # 既存データに新しい予定を追加
             existing_data.append(new_schedule)
+
             # データをファイルに書き込む
             with open("study.json", "w") as f:
                 json.dump(existing_data, f, indent=2, ensure_ascii=False)
 
-            return render_template("index.html")
+            # ここでstudy_dataに代入してHTMLに渡す
+            return render_template("index.html", study_data=existing_data)
         except Exception as e:
             return jsonify({"message": "エラーが発生しました"})
-
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
