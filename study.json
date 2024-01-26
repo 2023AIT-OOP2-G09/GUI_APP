@@ -1,7 +1,10 @@
 [
-    {
-      "date": "2024/01/03",
-      "study_schedule": "物理",
-      "study_time": "0:00"
-    }
-  ]
+  {
+    "study_time": "1",
+    "study_schedule": "物理実験"
+  },
+  {
+    "study_time": "3",
+    "study_schedule": "情報システム概論"
+  }
+]

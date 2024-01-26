@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/study.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Daily Study Time Pie Chart</title>
 </head>
 
@@ -14,85 +15,66 @@
     <div id="chart-label"></div>
   </div>
 
-  <form enctype="multipart/form-data" action="/study/to" method="post">
-    <!-- 予定入力フォーム -->
-    <label for="schedule">時間</label>
-    <input type="number" id="study_time" name="study_time" min= "0" required>時間
+  <div class="form-container">
+    <form enctype="multipart/form-data" action="/study/to" method="post">
+        <!-- 予定入力フォーム -->
+        <div class="form-row">
+            <label for="study_time">勉強時間</label>
+            <input type="number" id="study_time" name="study_time" min="0" required>
+        </div>
+        <div class="form-row">
+            <label for="study_schedule">勉強内容</label>
+            <input type="text" id="study_schedule" name="study_schedule" required>
+        </div>
 
-    <label for="schedule">勉強内容</label>
-    <input type="text" id="study_schedule" name="study_schedule" required>
-
-    <!-- 送信ボタン -->
-    <input type="submit" class="btn btn--add" value="追加">
-  </form>
-  
+        <!-- 送信ボタン -->
+        <input type="submit" class="btn btn--add" value="追加">
+    </form>
+  </div>
 
   <div class="button-container">
-    <a href="/add" class="btn btn--orange">追加</a>
+    <a href="/add" class="btn btn--orange">変更</a>
     <a href="/list" class="btn btn--orange">一覧</a>
     <a href="/" class="btn btn--orange">戻る</a>
   </div>
-
 
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // JSONデータ
-      const jsonData = [
-        {"date": "2024/01/09", "schedule": "こんにちは", "studyTime": 2},
-        {"date": "2024/01/11", "schedule": "こんにちは", "studyTime": 3},
-        {"date": "2024/01/12", "schedule": "物理実習", "studyTime": 4},
-        {"date": "2024/01/13", "schedule": "プログラミング実習", "studyTime": 5},
-        {"date": "2024/01/17", "schedule": "予定の追加（例）", "studyTime": 1},
-        {"date": "2024/02/01", "schedule": "予定の追加（例２）", "studyTime": 2}
-      ];//書き換え
+    document.addEventListener('DOMContentLoaded', function () {
+        // テンプレートから学習データを取得
+        var studyData = {{ study_data | tojson | safe }};
 
-      // 勉強時間データを処理して配列に変換
-      const studyTimeData = jsonData.map(item => item.studyTime);
+        // 学習時間とラベルを抽出
+        var studyTimes = studyData.map(function (entry) {
+            return entry.study_time;
+        });
 
-      // Chart.jsを使用して円グラフを描画
-      const ctx = document.getElementById('pie-chart').getContext('2d');
-      const pieChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: jsonData.map(item => item.schedule),
-          datasets: [{
-            data: studyTimeData,
-            backgroundColor: [
-              'red', 'blue', 'green', 'orange', 'purple', 'pink'
-            ]
-          }]
-        },
-        options: {
-          tooltips: {
-            callbacks: {
-              label: function(tooltipItem, data) {
-                const dataIndex = tooltipItem.index;
-                const label = data.labels[dataIndex];
-                const studyTime = jsonData[dataIndex].studyTime;
-                return `${label}: ${studyTime} hours`;
-              }
-            }
-          }
-        }
-      });
+        var studyLabels = studyData.map(function (entry) {
+            return entry.study_schedule;
+        });
 
-      // 一番多い時間と勉強名を表示
-      const maxIndex = studyTimeData.indexOf(Math.max(...studyTimeData));
-      const maxLabel = jsonData[maxIndex].schedule;
-      const maxStudyTime = studyTimeData[maxIndex];
-      const chartLabel = document.getElementById('chart-label');
-      chartLabel.innerHTML = `${maxLabel}<br>${maxStudyTime} hours`;
-      <canvas id="pie-chart"></canvas>
-      <div id="chart-label"></div>
-  </div>
+        // 円グラフの設定
+        var ctx = document.getElementById('pie-chart').getContext('2d');
+        var studyChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: studyLabels,
+                datasets: [{
+                    data: studyTimes,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                        'rgba(255, 206, 86, 0.7)',
+                        'rgba(75, 192, 192, 0.7)',
+                    ],
+                    borderWidth: 1,
+                }],
+            },
+        });
 
-  <script src="{{ url_for('static', filename='javascript/study.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <div class="button-container">
-    <a href="/add" class="btn btn--orange">追加</a>
-    <a href="/list" class="btn btn--orange">一覧</a>
-    <a href="/" class="btn btn--orange">戻る</a>
-  </div>
+        // ラベル表示用のdivにテキストをセット
+        var chartLabel = document.getElementById('chart-label');
+    });
+  </script>
 </body>
+
 </html>
