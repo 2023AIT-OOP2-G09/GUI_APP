@@ -1,0 +1,26 @@
+<!-- schedule_detail.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/schedule_detail.css') }}"/>
+    <title>Schedule Detail</title>
+</head>
+<body>
+    <h1>{{ day }}のスケジュール</h1>
+    <h2>予定: {{ schedule }}</h2>
+
+
+
+
+    <div class="button-container">
+        <a href="/add" class="btn btn--orange">追加</a>
+        <a href="/" class="btn btn--orange">戻る</a>
+        <a href="/study" class="btn btn--orange">勉強</a>
+    </div>
+
+    <script src="{{ url_for('static', filename='javascript/schedule_detail.js') }}"></script>
+</body>
+
+</html>

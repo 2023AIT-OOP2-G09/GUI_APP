@@ -50,7 +50,8 @@
     vertical-align: middle;
     text-align: center;
     border: 1px solid #000;
-    height: 3em;
+    height: 5em;
+    width: 15em;
   }
   
   /* カレンダーテーブルで日付が入らない部分 */

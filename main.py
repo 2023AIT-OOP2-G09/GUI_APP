@@ -89,6 +89,12 @@ def study():
     # 予定追加のtemplateを返す
     return render_template("study.html")
 
+@app.route("/index/to")
+def schedule_detail():
+    day = request.args.get("day", "")
+    schedule = request.args.get("schedule", "")
+    return render_template("schedule_detail.html", day=day, schedule=schedule)
+
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
