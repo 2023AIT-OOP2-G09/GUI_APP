@@ -8,11 +8,13 @@
     <title>Schedule Detail</title>
 </head>
 <body>
-    <h1>{{ day }}のスケジュール</h1>
-    <h2>予定: {{ schedule }}</h2>
-
-
-
+    <h1>予定:
+        <br>
+        {% for scheduleEntry in schedulesForDay %}
+            {{ scheduleEntry.schedule }}
+            {% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+    </h1>
 
     <div class="button-container">
         <a href="/add" class="btn btn--orange">追加</a>
@@ -22,5 +24,4 @@
 
     <script src="{{ url_for('static', filename='javascript/schedule_detail.js') }}"></script>
 </body>
-
 </html>

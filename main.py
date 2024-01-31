@@ -20,6 +20,19 @@ def fetch_schedule():
         schedule_data = json.load(f)
     return jsonify(schedule_data)
 
+@app.route("/index/to")
+def schedule_detail():
+    day = request.args.get("day", "")
+    schedule_json = request.args.get("schedule", "[]")  # デフォルト値は空のJSONリスト
+    schedulesForDay = json.loads(schedule_json)
+
+    # 例えば、dateをdatetimeオブジェクトとして取得する場合
+    date = datetime.now()
+
+    # フォーマットした日付をテンプレートに渡す
+    formatted_date = date.strftime("%m/%d")
+
+    return render_template("schedule_detail.html", day=formatted_date, schedulesForDay=schedulesForDay)
 
 # 予定追加のページ
 @app.route("/add")
@@ -88,13 +101,6 @@ def address_get():
 def study():
     # 予定追加のtemplateを返す
     return render_template("study.html")
-
-@app.route("/index/to")
-def schedule_detail():
-    day = request.args.get("day", "")
-    schedule = request.args.get("schedule", "")
-    return render_template("schedule_detail.html", day=day, schedule=schedule)
-
 
 # Flaskアプリケーションの起動
 if __name__ == "__main__":
