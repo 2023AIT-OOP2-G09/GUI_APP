@@ -1,4 +1,4 @@
-# GUI_APP
+# スタカレ
 GUIアプリ用のリポジトリ
 
 ## 役割分担
@@ -20,19 +20,28 @@ GUIアプリ用のリポジトリ
 - 画面中央にカレンダーが表示されている
 - カレンダー内に予定が表示される
 - 下、三つのボタンで予定の追加、一覧、勉強のページへと飛べる
+<br>
+<img src="app_images/calender_ex.png" width="500">
 
 ▫️予定の追加画面
 - 日程、予定、時間の部分を選択し、予定の追加を行える
+<br>
+<img src="app_images/add.png" width="500">
 
 ▫️予定の一覧画面
 - 登録した予定を一覧で見ることができる
 - 予定を日程、時間、スケジュールで検索することができる
+<br>
+<img src="app_images/list.png" width="500">
 
 ▫️勉強時間の画面
 - 勉強時間の登録ができる
 - 勉強時間を円グラフで見ることができる
+<br>
+<img src="app_images/study.png" width="500">
 
 ## ディレクトリの構造
+```
 - **[GUI_APP]**
   - **[app_images]**
     - オブジェクト演習GUIアプリ案＿柴田.pdf
@@ -63,3 +72,4 @@ GUIアプリ用のリポジトリ
   - main.py（Flask側のプログラム）
   - README.md
   - schedule.json（スケジュールのデータ）
+```

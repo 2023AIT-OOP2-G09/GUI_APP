@@ -69,27 +69,4 @@ body {
    border-radius: 0.5rem;
   }
 
-  /* 検索フォームを中央に配置し、サイズを調整するためのスタイルを追加 */
-#search {
-  text-align: center;
-  margin: 20px auto; /* 必要に応じてマージンを調整 */
-  max-width: 600px; /* フォームの最大幅を設定してサイズを制限 */
-}
-
-#search div {
-  display: flex;
-  justify-content: center;
-}
-
-#search input[type="text"],#search input[type="date"], #search input[type="time"]{
-  width: 80%; /* 必要に応じて幅を調整 */
-  padding: 10px; /* 外観を向上させるためにパディングを追加 */
-  margin: 5px; /* 入力フィールド間のスペーシングのためにマージンを追加 */
-}
-
-#search-submit {
-  width: auto; /* ボタンが内容に基づいて幅を調整できるようにする */
-  padding: 10px 20px; /* ボタンにパディングを追加 */
-  margin: 5px; /* スペーシングのためにマージンを追加 */
-}
-
+ 

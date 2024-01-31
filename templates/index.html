@@ -24,7 +24,14 @@
         <a href="/study" class="btn btn--orange">勉強</a>
       </div>
     </div>
-
     <script src="{{ url_for('static', filename='javascript/schedule_detail.js') }}"></script>
-  </body>
+    <div id="calendar_body"></div>
+    <div class="button-container">
+      <a href="/add" class="btn btn--orange">変更</a>
+      <a href="/list" class="btn btn--orange">一覧</a>
+      <a href="/study" class="btn btn--orange">勉強</a>
+    </div>
+    <div id="today_schedule_label">＜今日の予定＞</div>
+  </div>
+ </body>
 </html>
